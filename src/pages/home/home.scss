@@ -36,7 +36,7 @@ $secondary-color: #310e68;
 
       .label {
         text-align: left;
-        font-size: 14px;
+        font-size: 16px;
         padding-bottom: 5px;
         font-weight: 500;
       }
@@ -54,33 +54,32 @@ $secondary-color: #310e68;
       }
     }
 
+    .error-message{
+      background: #ffe7e7;
+      padding: 5px;
+      border-left: 4px solid red;
+      color: red;
+      width: 295px;
+      text-align: left;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
     button {
       width: 200px;
       height: 40px;
       margin-top: 20px;
-      background: #5f0f40;
+      background: $primary-color;
       color: white;
       border-radius: 10px;
       border: 1px solid #d9d9d9;
       box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
       cursor: pointer;
-      display: inline-block;
       font-size: 16px;
       font-weight: 500;
-    }
-  }
-
-  .cards-container {
-    margin: 20px;
-    display: flex;
-    column-gap: 20px;
-    .card {
-      width: 200px;
-      height: 300px;
-      background: #f0f0f06b;
-      border: 2px solid #5f0f4069;
-      border-radius: 10px;
-      padding: 10px;
+      &:hover{
+        background: lighten($primary-color, 5%);
+      }
     }
   }
 }

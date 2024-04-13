@@ -5,11 +5,17 @@ import CardStack from "../../components/card-stack";
 const Home = () => {
     const [numPlayers, setNumPlayers] = useState('');
     const [distribution, setDistribution] = useState([]);
+    let initialErrorData = {
+        invalidNumber : false
+    }
+    const [error, setError] = useState(initialErrorData)
 
+    //Logic to handle card distribution based on number of players
     const handleDistribution = () => {
         const totalPlayers = parseInt(numPlayers);
+        setError(initialErrorData)
         if (!totalPlayers || totalPlayers < 0) {
-            alert('Input value does not exist or value is invalid');
+            setError({...error, invalidNumber: true})
             setDistribution([])
             return;
         }
@@ -39,6 +45,7 @@ const Home = () => {
         setDistribution(distributionArray);
     };
 
+    //Logic to shuffle cards
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -55,13 +62,15 @@ const Home = () => {
             <div className="form-container">
                 <div className="input-box">
                     <div className="label">Number of players</div>
-                    <input type="number" className="form-control" placeholder="Enter number of players" value={numPlayers}
+                    <input type="number" className="form-control" placeholder="Enter number of players"
+                           value={numPlayers}
                            onChange={(e) => setNumPlayers(e.target.value)}/>
+                    {error.invalidNumber && <span className="error-message">Input value does not exist or value is invalid</span>}
                 </div>
                 <button onClick={handleDistribution}>Distribute Cards</button>
             </div>
-            {distribution.length ? (<div>
-
+            {distribution.length ?
+                <div>
                     <div className="raw-output">
                         <div>Raw output:</div>
                         {distribution.map((item, index) => {
@@ -70,10 +79,8 @@ const Home = () => {
                             </div>
                         })}
                     </div>
-
-
-                <CardStack distributionList={distribution}></CardStack>
-            </div> ) : null}
+                    <CardStack distributionList={distribution}></CardStack>
+                </div> : null}
         </div>
     );
 };

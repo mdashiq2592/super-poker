@@ -1,6 +1,8 @@
 <br />
 
-<h3 align="center">Playing Cards Distribution - React</h3>
+<h3 align="center">Super Poker</h3>
+<p align="center">Distribute playing cards by number of players</p>
+
 
 #### Technologies Used
 
@@ -40,8 +42,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deployment
 
-Deployed the application using vercel
+Deployed the app using [Vercel](https://vercel.com/)
+
+Checkout the [demo app here](https://super-poker.vercel.app/)
 
 ## Screenshots
-![./img.png](./public/img.png)
-![img_1.png](./public/img_1.png)
+![./img.png](./public/screenshot_1.png)
+![img.png](./public/screenshot_2.png)
+![img_1.png](./public/screenshot_3.png)
