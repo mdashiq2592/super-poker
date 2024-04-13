@@ -1,0 +1,128 @@
+$primary-color: #5f0f40;
+$secondary-color: #310e68;
+
+@keyframes hover {
+  to {
+    translate: 0px 12px;
+  }
+}
+
+.grid-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grid-item{
+  width: -webkit-fill-available;
+  &:hover {
+    z-index: 10000;
+  }
+}
+
+.card-stack {
+  background: linear-gradient(316deg, $secondary-color 0%, $primary-color 74%);
+  margin-top: 35px;
+  padding: 20px 0 100px 0px;
+  .card_list {
+    min-height: 400px;
+    --cards: 52;
+    --curvature: 120deg;
+    counter-reset: cards;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    transform: translateY(15vmin);
+    transform-style: preserve-3d;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    padding: 0;
+
+    li {
+      list-style: none;
+    }
+
+    &::after {
+      content: "Player - " attr(data-person-index);
+      padding: 10px;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      position: absolute;
+      align-items: flex-start;
+      bottom: 80px;
+    }
+
+    > * {
+      --curve: calc(
+              var(--curvature) * ((var(--index) - (var(--cards) - 1) / 2) / var(--cards))
+      );
+      position: absolute;
+      counter-increment: cards;
+      flex: 0 0 auto;
+      width: 75px;
+      aspect-ratio: 2/3;
+      transform-origin: 50% 100%;
+      transform: rotate(var(--curve)) translateY(-200%);
+      transition: all 0.3s;
+      cursor: pointer;
+      transform-style: preserve-3d;
+
+      &::before {
+        content: attr(data-suit) attr(data-number);
+        display: flex;
+        padding: 10px;
+        justify-content: start;
+        position: absolute;
+        font-weight: bold;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        box-shadow: inset 0 0 80px rgba(150, 100, 50, 0.5), 0 0 3px #966432;
+        transition: all 0.3s, translate 0s;
+        border-radius: 4px;
+        pointer-events: none;
+      }
+
+      &:hover {
+        animation: hover 1s ease-in-out alternate forwards;
+
+        &::before {
+          transform: translateY(-42.5%) rotate(calc(var(--curve) * -1)) scale(1.01);
+          color: hsl(var(--hue), 60%, 80%);
+          translate: 0px 0px 2px;
+        }
+      }
+
+      @media screen and (max-width: 450px) {
+        width: 35px;
+      }
+    }
+
+    @for $i from 1 through 52 {
+      &:has(li:nth-child(#{$i})) {
+        --cards: #{$i};
+      }
+
+      > *:nth-child(#{$i}) {
+        --index: #{$i - 1};
+        margin-top: 20%;
+      }
+    }
+
+  }
+}
+
+
+.empty-slot {
+  width: 200px;
+  height: 300px;
+  background: #f0f0f06b;
+  border: 2px solid #5f0f4069;
+  border-radius: 10px;
+  padding: 10px;
+}
+
